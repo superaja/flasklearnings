@@ -1,0 +1,6 @@
+flask_tut1/*.pyc
+flasktut/*.pyc
+flasktut/app/*.pyc
+flasktut/db_repository/*.pyc
+*.pyc
+
