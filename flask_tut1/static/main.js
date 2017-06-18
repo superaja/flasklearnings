@@ -14,8 +14,8 @@ $(document).ready(function() {
                         url: "/",
                         data: {first: x, second:y},
                         success: function(data) {
-                        console.log(data);
-                        // $("#data").html(data.total)
+                        console.log(data.items[0]);
+                        $("#data").html('<a href="'+data.items[0].html_url+'">'+data.items[0].login+'</a>')
                         $("#input").val("")
                         },
                         error: function(error){
