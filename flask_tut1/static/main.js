@@ -1,5 +1,6 @@
 $(document).ready(function() {
                 console.log("ready");
+                $("#try-again").hide()
  
         $("form").on("submit", function() {
                 console.log("The form has been submitted AD")
@@ -14,9 +15,20 @@ $(document).ready(function() {
                         url: "/",
                         data: {first: x, second:y},
                         success: function(data) {
-                        console.log(data.items[0]);
-                        $("#data").html('<a href="'+data.items[0].html_url+'">'+data.items[0].login+'</a>')
-                        $("#input").val("")
+                        
+                        if (data.items.length > 0) {
+                        $('input').hide();
+                        $("#try-again").show();
+                        var rand = Math.floor(Math.random() * Object.keys(data.items).length)
+                        console.log(data.items[rand].avatar_url);
+                        $("#data").html('<a href="'+data.items[rand].html_url+'">'+data.items[rand].login+
+                                '</a><br><img src="'+data.items[rand].avatar_url+'" class="avatar">')
+                        $("input").val("")
+
+                        } else {
+                                $("#data").html('Error')
+                        }
+
                         },
                         error: function(error){
                         console.log(error);
@@ -24,5 +36,11 @@ $(document).ready(function() {
                 });
  
         });
- 
+        
+        $("#try-again").on('click', (function() {
+                /* Act on the event */
+                $('input').val('').show();
+                $("#try-again").hide();
+                $('data').html('')
+        })); 
 });
